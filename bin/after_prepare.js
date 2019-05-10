@@ -8,7 +8,7 @@ module.exports = function (context) {
 		cordova = req('cordova'),
 		cordova_lib = cordova.cordova_lib,
 		cordova_lib_util = req('cordova-lib/src/cordova/util'),
-		fs = require("./lib/filesystem")(Q, req('fs'), path),
+		fs = require("./lib/filesystem")(Q, require('fs'), path),
 		settings = require("./lib/settings")(fs, path),
 		platforms = {};
 
