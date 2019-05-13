@@ -91,6 +91,10 @@ module.exports = function(Q, fs, path) {
 			
 		return defer.promise;
 	}
+
+	function mkdirSync(dest, opt) {
+		fs.mkdirSync(dest, opt);
+	}
 	
 	function mkdir(dest) {
 		var defer = Q.defer();
@@ -130,6 +134,7 @@ module.exports = function(Q, fs, path) {
 		unlink: unlink,
 		
 		mkdir: mkdir,
+		mkdirSync: mkdirSync,
 		rmdir: rmdir
 	};
 };
