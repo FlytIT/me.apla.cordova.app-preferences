@@ -5,15 +5,15 @@ module.exports = function (context) {
 
 	var
 		req = context ? context.requireCordovaModule : require,
-		Q = req('q'),
-		path = req('path'),
-		ET = req('elementtree'),
-		cordova = req('cordova'),
+		Q = require('q'),
+		path = require('path'),
+		ET = require('elementtree'),
+		cordova = require('cordova'),
 		cordova_lib = cordova.cordova_lib,
 		ConfigParser = cordova_lib.configparser,
-		cordova_util = req('cordova-lib/src/cordova/util'),
-		ofs = req("fs"),
-		fs = require("./filesystem")(Q, req('fs'), path),
+		cordova_util = require('cordova-lib/src/cordova/util'),
+		ofs = require("fs"),
+		fs = require("./filesystem")(Q, require('fs'), path),
 		platforms = {};
 
 	// fs, path, ET, cordova_util, ConfigParser
@@ -242,6 +242,13 @@ module.exports = function (context) {
 			.then(function (data) {
 				var androidPackagePath = "me.apla.cordova".replace (/\./g, '/');
 				var activityFileName= path.join (pathJava, androidPackagePath, 'AppPreferencesActivity.java');
+
+				var activityFolderName = path.join(pathJava, androidPackagePath);
+
+				fs.mkdirSync(activityFolderName, {recursive: true}, (err) => {
+					if (err) throw err;
+				});
+
 				return fs.writeFile(activityFileName, data);
 			})
 
